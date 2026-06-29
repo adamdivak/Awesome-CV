@@ -81,6 +81,29 @@
 \defaultfontfeatures{
   Renderer=HarfBuzz,
 }
+% Local override: if the Source Sans Pro .otf files are present in fonts/
+% (e.g. on Overleaf, where the font is not installed by name), load them
+% directly from there. Otherwise fall through to the upstream logic below.
+\IfFontExistsTF{[fonts/SourceSansPro-Regular.otf]}{%
+  \setmainfont{SourceSansPro}[
+    Path=fonts/,
+    UprightFont=*-Regular,
+    ItalicFont=*-It,
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldIt,
+    FontFace={l}{n}{Font=*-Light},
+    FontFace={l}{it}{Font=*-LightIt},
+  ]
+  \setsansfont{SourceSansPro}[
+    Path=fonts/,
+    UprightFont=*-Regular,
+    ItalicFont=*-It,
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldIt,
+    FontFace={l}{n}{Font=*-Light},
+    FontFace={l}{it}{Font=*-LightIt},
+  ]
+}{%
 % Support both "Source Sans 3" (variable or static, from Adobe/Homebrew/distro
 % packages) and "Source Sans Pro" (static, bundled with TeX Live).
 \IfFontExistsTF{Source Sans 3}{%
@@ -115,6 +138,7 @@
     FontFace={l}{n}{Font=*-Light},
     FontFace={l}{it}{Font=*-LightItalic},
   ]
+}
 }
 \newfontfamily\roboto{Roboto}[
   UprightFont=*,
